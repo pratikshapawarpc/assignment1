@@ -1,0 +1,58 @@
+using System;
+
+public abstract class Product
+{
+    public abstract void Use();
+}
+
+public class ConcreteProductA : Product
+{
+    public override void Use()
+    {
+        Console.WriteLine("Using Product A");
+    }
+}
+
+public class ConcreteProductB : Product
+{
+    public override void Use()
+    {
+        Console.WriteLine("Using Product B");
+    }
+}
+
+public abstract class Creator
+{
+    public abstract Product FactoryMethod();
+}
+
+public class ConcreteCreatorA : Creator
+{
+    public override Product FactoryMethod()
+    {
+        return new ConcreteProductA();
+    }
+}
+
+public class ConcreteCreatorB : Creator
+{
+    public override Product FactoryMethod()
+    {
+        return new ConcreteProductB();
+    }
+}
+
+// Usage
+class Program
+{
+    static void Main(string[] args)
+    {
+        Creator creatorA = new ConcreteCreatorA();
+        Product productA = creatorA.FactoryMethod();
+        productA.Use();
+
+        Creator creatorB = new ConcreteCreatorB();
+        Product productB = creatorB.FactoryMethod();
+        productB.Use();
+    }
+}
