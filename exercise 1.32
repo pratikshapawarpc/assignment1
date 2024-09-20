@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+public interface IComponent
+{
+    void Operation();
+}
+
+public class Leaf : IComponent
+{
+    public void Operation()
+    {
+        Console.WriteLine("Leaf operation");
+    }
+}
+
+public class Composite : IComponent
+{
+    private List<IComponent> _children = new List<IComponent>();
+
+    public void Add(IComponent component)
+    {
+        _children.Add(component);
+    }
+
+    public void Operation()
+    {
+        Console.WriteLine("Composite operation");
+        foreach (var child in _children)
+        {
+            child.Operation();
+        }
+    }
+}
+
+// Usage
+class Program
+{
+    static void Main(string[] args)
+    {
+        Composite composite = new Composite();
+        composite.Add(new Leaf());
+        composite.Add(new Leaf());
+
+        composite.Operation();
+    }
+}
